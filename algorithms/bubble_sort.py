@@ -1,17 +1,17 @@
-"""Пузырьковая сортировка с подсчётом сравнений."""
-
-
-def bubble_sort(values):
-    data = list(values)
+def bubble_sort(values, on_step=None):
+    arr = values.copy()
     comparisons = 0
-    for end in range(len(data) - 1, 0, -1):
-        changed = False
-        for index in range(end):
+    n = len(arr)
+
+    for i in range(n):
+        for j in range(n - i - 1):
             comparisons += 1
-            if data[index] > data[index + 1]:
-                data[index], data[index + 1] = data[index + 1], data[index]
-                changed = True
-        # Отсортированный массив не требует следующих проходов.
-        if not changed:
-            break
-    return data, comparisons
+
+            if arr[j] > arr[j + 1]:
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+
+            if on_step:
+                on_step(arr.copy(), (j, j + 1))
+
+    return arr, comparisons
+

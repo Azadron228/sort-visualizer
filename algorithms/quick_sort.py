@@ -1,23 +1,33 @@
-"""Быстрая сортировка с подсчётом сравнений."""
 
-
-def quick_sort(values):
-    data = list(values)
+def quick_sort(values, on_step=None):
     comparisons = 0
-    # Стек позволяет обойтись без рекурсии.
-    stack = [(0, len(data) - 1)]
-    while stack:
-        low, high = stack.pop()
-        if low >= high:
-            continue
-        pivot = data[high]  # Последний элемент — опорный.
-        boundary = low
-        for index in range(low, high):
-            comparisons += 1
-            if data[index] <= pivot:
-                data[index], data[boundary] = data[boundary], data[index]
-                boundary += 1
-        data[boundary], data[high] = data[high], data[boundary]
-        stack.extend([(low, boundary - 1), (boundary + 1, high)])
-    return data, comparisons
 
+    def sort(arr):
+        nonlocal comparisons
+
+        if len(arr) <= 1:
+            return arr
+
+        pivot = arr[len(arr) // 2]
+
+        left = []
+        middle = []
+        right = []
+
+        for x in arr:
+            comparisons += 1
+
+            if x < pivot:
+                left.append(x)
+            elif x == pivot:
+                middle.append(x)
+            else:
+                right.append(x)
+
+            if on_step:
+                on_step(left + middle + right, ())
+
+        return sort(left) + middle + sort(right)
+
+    result = sort(list(values))
+    return result, comparisons
