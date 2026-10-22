@@ -5,10 +5,10 @@ import random
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 
-from algorithms import bubble_sort, quick_sort
+from algorithms import bubble_sort, shaker_sort, insertion_sort
 
 
-ALGORITHM = "Пузырьковая"  # Варианты: Пузырьковая, Быстрая.
+ALGORITHM = "Шейкерная"  # Варианты: Пузырьковая (обменная), Шейкерная, Включением.
 SIZE = 30
 SEED = 42
 INTERVAL = 60  # Задержка между кадрами в миллисекундах.
@@ -19,8 +19,9 @@ DONE_COLOR = "#59a14f"
 
 
 ALGORITHMS = {
-    "Пузырьковая": bubble_sort,
-    "Быстрая": quick_sort,
+    "Пузырьковая (обменная)": bubble_sort,
+    "Шейкерная": shaker_sort,
+    "Включением": insertion_sort,
 }
 
 
